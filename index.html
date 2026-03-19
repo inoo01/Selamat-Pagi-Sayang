@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message 🌸</title>
+    <style>
+        :root {
+            --pink-bg: #ffe4e1;
+            --pink-accent: #ffb6c1;
+            --text-color: #d87093;
+        }
+
+        body {
+            background-color: var(--pink-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 350px;
+            border: 4px solid var(--pink-accent);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        #card:hover {
+            transform: scale(1.02);
+        }
+
+        h1 { color: var(--text-color); font-size: 1.5rem; }
+        p { color: #666; line-height: 1.6; }
+
+        .btn {
+            background-color: var(--pink-accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: var(--pink-accent);
+            animation: float 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="card" onclick="nextMessage()">
+        <h1 id="title">Good morning, ☀️</h1>
+        <p id="message">I hope you have the most beautiful day today! 🌸</p>
+        <button class="btn" id="btnText">Click me!</button>
+    </div>
+
+    <script>
+        let step = 0;
+        const title = document.getElementById('title');
+        const message = document.getElementById('message');
+        const btn = document.getElementById('btnText');
+
+        function nextMessage() {
+            step++;
+            if (step === 1) {
+                title.innerHTML = "I just wanted to say... 💞";
+                message.innerHTML = "You make every day so much brighter just by being you.";
+                btn.innerHTML = "One more thing!";
+            } else if (step === 2) {
+                title.innerHTML = "I love you! 💖";
+                message.innerHTML = "Forever and always. You're my favorite person! 🌷";
+                btn.innerHTML = "Wait for it...";
+            } else if (step === 3) {
+                title.innerHTML = "MUACH! 💋";
+                message.innerHTML = "Sending you a huge virtual kiss! 🌸✨";
+                btn.style.display = "none";
+                createHearts();
+            }
+        }
+
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '💕';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
